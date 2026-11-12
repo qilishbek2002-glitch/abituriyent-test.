@@ -14,13 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Maxfiy so'z borligini tekshirish
+      - name: Maxfiy so'z (faqat pullik rejimda kerak)
         env:
           ACTIVATION_SECRET: ${{ secrets.ACTIVATION_SECRET }}
         run: |
           if [ -z "$ACTIVATION_SECRET" ]; then
-            echo "::error::GitHub Secret 'ACTIVATION_SECRET' topilmadi. Repository -> Settings -> Secrets and variables -> Actions -> New repository secret"
-            exit 1
+            echo "::warning::ACTIVATION_SECRET kiritilmagan. Ilova bepul rejimda bu kerak emas. Obunani yoqmoqchi bo'lsangiz: Settings -> Secrets and variables -> Actions -> New repository secret"
           fi
 
       - uses: actions/setup-java@v4
